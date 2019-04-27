@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#sizePicker').submit(function makeGrid(grid){
-        var row_input = $('#input_height').val();
-        var col_input = $('#input_width').val();
+       const row_input = $('#input_height').val();
+       const col_input = $('#input_width').val();
         for (var x = 1; x <= row_input; x++){
             $('table').append('<tr></tr>');
             for (var i = 1; i <= col_input; i++){

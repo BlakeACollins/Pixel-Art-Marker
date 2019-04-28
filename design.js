@@ -1,45 +1,35 @@
-function makeGrid() {
-	console.log("makeGrid is running!")
-	
-	// Select size input
-	
-	var canvas, cell, gridHeight, gridWidth, rows;
-	
-	canvas = $('#pixel_canvas');
-	gridHeight = $('#input_height').val();
-	gridWidth = $('#input_width').val();
-	
-	canvas.children().remove()
-	
-	for (x = 0; x < gridHeight; x++) {
-	canvas.append('<tr></tr>');
-	}
-	
-	rows = $('tr');
-	
-	for (y = 0; y < gridWidth; y++) {
-	rows.append('<td></td>');
-	} 
-	
-	cell = canvas.find('td');
-	
-	// When td is clicked by the user, change color of td
-	cell.click(function() {
-		// Select color input
-		console.log("changeColor is running!");
-		var color;
-		color = $("#colorPicker").val();
-		$(this).attr('bgcolor', color);
-	});
-	
-}
+"use strict";
 
-// When size is submitted by the user, call makeGrid()
-var submitQuery;
+const $tableElement = $('#pixelCanvas');
+const $inputHeight = $('#inputHeight');
+const $inputWidth = $('#inputWidth');
+const $colorPicker = $('#colorPicker');
 
-submitQuery = $('input[type="submit"]')
+$('#sizePicker').submit( event => {
+    event.preventDefault();
 
-submitQuery.click(function(event) {
-  event.preventDefault();
-  makeGrid();
+    let width = $inputWidth.val();
+    let height = $inputHeight.val();
+
+    $tableElement.html(''); //clear
+
+    makeGrid(height, width);
+    addCellClickListener();
 });
+
+function makeGrid(height, width) {
+    for(let i = 0; i < height; i++) {
+        $tableElement.append('<tr></tr>');
+    };
+
+    for(let i = 0; i < width; i++) {
+        $('tr').append('<td></td>');
+    };
+};
+
+function addCellClickListener() {
+    $('td').click( event => {
+        let color = $colorPicker.val();
+        $(event.currentTarget).css("background-color", color)
+    });
+};

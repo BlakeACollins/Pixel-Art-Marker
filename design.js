@@ -1,10 +1,16 @@
+
+/*Eliminates some JavaScript silent errors by changing them to throw errors
+* No undeclared variables are allowed.*/
 "use strict";
 
+// global variables
 const $tableElement = $('#pixelCanvas');
 const $inputHeight = $('#inputHeight');
 const $inputWidth = $('#inputWidth');
 const $colorPicker = $('#colorPicker');
 
+
+// creating the grid on submit
 $('#sizePicker').submit( event => {
     event.preventDefault();
 
@@ -17,6 +23,8 @@ $('#sizePicker').submit( event => {
     addCellClickListener();
 });
 
+
+// grid generated based on user input
 function makeGrid(height, width) {
     for(let i = 0; i < height; i++) {
         $tableElement.append('<tr></tr>');
@@ -27,6 +35,8 @@ function makeGrid(height, width) {
     };
 };
 
+
+//the color on click
 function addCellClickListener() {
     $('td').click( event => {
         let color = $colorPicker.val();
